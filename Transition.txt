@@ -1,0 +1,51 @@
+Hello from Team Kinetic Domain
+
+This document details the current state of the app at time of transition.
+
+
+Features that are complete:
+
+Tagging
+Tag creation
+Image Saving
+KSA creation
+Skill creation
+Drag + drop + nesting skills and Tags
+Chapter Marking
+Video upload
+Video selection
+KSA library
+
+Features that are unfinished:
+
+KSA logic
+KSA importing / copying
+
+
+
+
+Breakdown of technologies used / things you should know
+
+Vanilla Modal: The video library and KSA library are populated using angular and vanilla modal.
+The modal is created in the index jade file. On loading of scripts.js it is populated and the elements are added to the div.They elements are delted and retrieved every time the modal is closed or opened. Some 
+of the css and js is coppied from the video system for the KSA system. For this reason some of this code is poorly or incorrectly labeled.
+
+AngularJS: 
+Angular is used for a the nested canvas system. The library used and the JS controlling the KSA canvas
+can all be found in publi/nested. This code heavily relies on angular and its scoping methods to dynamiclly populate the page.
+
+Socket.io: 
+Some interactions were done with sockets early on to avoid issues and limitations with ajax.
+This was largely abandoned as the project continued, but some system calls still use sockets.
+Most of the video featurs rely no this technology, but it could be replaced with pure ajax.
+
+
+UNFINISHED FEATURES
+
+Logic was not implemented in this build due to time constraints. The structre of the ksa objects can be viewed in the nested code.
+In this structre you can see there are colums for nesting, in these colums logic could be specified and stored. This would then need to be reflected in the frond end and user interaction would need to be added to support this.
+
+
+We want to allow users to copy parts of ksa's into other KSA's, or import them if you will to allow copying of skills and such.
+This can largely be done with the functions to retrieve and browse KSA's. Some client side code would be needed to implement this type of functionality. Bones of a custom context menu brought up by right clicking have veen created for ths purpose, but are not finished. 
+

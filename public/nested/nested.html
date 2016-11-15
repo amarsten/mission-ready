@@ -1,0 +1,94 @@
+<!-- Markup for lists inside the dropzone. It's inside a seperate template
+     because it will be used recursively. The dnd-list directive enables
+     to drop elements into the referenced array. The dnd-draggable directive
+     makes an element draggable and will transfer the object that was
+     assigned to it. If an element was dragged away, you have to remove
+     it from the original list yourself using the dnd-moved attribute -->
+<h1 style="color:red;" editable-text="models.title">{{ models.title || "KSA Title" }}</h1>
+<script type="text/ng-template" id="list.html">
+    <ul dnd-list="list">
+        <li ng-repeat="tag in list"
+            dnd-draggable="tag"
+            dnd-effect-allowed="move"
+            dnd-moved="list.splice($index, 1)"
+            dnd-selected="models.selected = tag"
+            ng-class="{selected: models.selected === tag}"
+            ng-include="tag.type + '.html'"
+            class="{{tag.type}}">
+        </li>
+    </ul>
+</script>
+
+<!-- This template is responsible for rendering a skill element. It uses
+     the above list template to render each skill column -->
+<script type="text/ng-template" id="skill.html">
+    <div class="skill-element box box-blue rubricSkill" dnd-type="skill" id="{{tag._id}}">
+        <div class="actions"><h1 editable-text="tag.title">{{ tag.title || "empty" }}</h1></div>
+        <div class="c0lumn" ng-repeat="list in tag.columns" ng-include="'list.html'" data-ng-element-ready="skillReady({{tag.id}})"></div>
+        <div class="clearfix"></div>
+        <div class="addTag">
+          <input type="button" value="create new tag" ng-click="createTag(tag)" />
+          <input type="button" value="delete skill '{{tag.title}}' & contents" ng-click="remove(tag)" />
+        </div>
+    </div>
+</script>
+
+<!-- {{ tag.filepath }} -->
+<!-- <img src="/uploads/img/{{tag._id}}.png"> -->
+<!-- Template for a normal list tag -->
+<script type="text/ng-template" id="tag.html" >
+    <div class="rubricTag" id="{{tag._id}}">
+    <img src="{{tag.filepath}}">
+      <aside>
+        <h2 editable-text="tag.title">{{ tag.title || "empty" }}</h2>
+      </aside>
+    </div>
+    <input type="button" class="delete" value="delete '{{tag.title}}'" ng-click="remove(tag)" />
+</script>
+
+<!-- Main area with dropzones and source code -->
+        <div ng-repeat="(zone, list) in models.dropzones" >
+            <div class="dropzone box box-yellow">
+                <!-- The dropzone also uses the list template -->
+                <!-- <h3>Dropzone {{zone}}</h3> -->
+                <div ng-include="'list.html'"></div>
+            </div>
+        </div>
+
+
+        <ul>
+            <input type="button" value="new skill" ng-click="createSkill()" />
+            <input type="button" value="new KSA" ng-click="createKSA()" />
+        </ul>
+
+
+<!-- Sidebar -->
+<!-- <div class="col-md-2"> -->
+
+    <!-- <div class="toolbox box box-grey box-padding">
+        <h3>New Elements</h3>
+        <ul>
+            <li ng-repeat="tag in models.templates"
+                dnd-draggable="tag"
+                dnd-effect-allowed="copy"
+                dnd-copied="tag.id = tag.id + 1"
+                >
+                <button type="button" class="btn btn-default btn-lg" disabled="disabled">{{tag.type}}</button>
+            </li>
+        </ul>
+    </div> -->
+
+    <!-- <div ng-if="models.selected" class="box box-grey box-padding">
+        <h3>Selected</h3>
+        <strong>Type: </strong> {{models.selected.type}}<br>
+        <input type="text" ng-model="models.selected.id" class="form-control" style="margin-top: 5px" />
+    </div> -->
+
+    <!-- <div class="trashcan box box-grey box-padding">
+        <h3>Trashcan</h3>
+        <ul dnd-list="[]">
+            <li><img src="nested/trashcan.jpg"></li>
+        </ul>
+    </div> -->
+
+<!-- </div> -->

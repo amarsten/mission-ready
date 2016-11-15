@@ -1,0 +1,30 @@
+{
+  "name": "missionReady",
+  "version": "0.1.0",
+  "description": "TOP SECRET",
+  "author": {
+    "name": "Team Kinetic Domain",
+    "email": "dtpowers@cmu.edu",
+    "url": "http://www.andrew.cmu.edu/course/67-328"
+  },
+  "engines": {
+    "node": "~5.6.0",
+    "npm": "~3.7.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "~4.13.4",
+    "ffmpeg": "~0.0.4",
+    "jade": "~1.11.0",
+    "mongodb": "^2.1.7",
+    "morgan": "~1.7.0",
+    "multer": "~1.1.0",
+    "node-uuid": "^1.4.7",
+    "socket.io": "^1.4.5",
+    "video.js": "^5.7.1"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "private": true,
+  "main": "server.js"
+}
